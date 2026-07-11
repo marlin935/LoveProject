@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Someone Special ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background: #000 ;
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.card{
+width:90%;
+max-width:420px;
+padding:35px;
+text-align:center;
+border-radius:30px;
+
+background:rgba(0,0,0,0.75);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:
+0 0 50px rgba(255,0,90,.35);
+
+animation:card 1.2s ease;
+}
+
+@keyframes card{
+from{
+transform:translateY(60px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+.character{
+width:160px;
+height:auto;
+display:block;
+margin:0 auto 20px;
+object-fit:contain;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-12px);
+}
+}
+
+h1{
+color:white;
+margin-top:15px;
+font-size:30px;
+text-shadow:0 0 15px rgba(255,255,255,.7);
+}
+
+p{
+margin-top:18px;
+color:white;
+font-size:18px;
+line-height:30px;
+}
+
+button{
+margin-top:30px;
+padding:15px 35px;
+border:none;
+border-radius:50px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+
+background:white;
+color:#ff4d6d;
+
+transition:.3s;
+box-shadow:0 0 20px rgba(255,255,255,.5);
+}
+
+button:hover{
+transform:scale(1.08);
+box-shadow:0 0 30px white;
+}
+
+.heart{
+position:absolute;
+bottom:-50px;
+font-size:22px;
+animation:float linear infinite;
+opacity:.8;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+  .confetti{
+position:fixed;
+top:-20px;
+font-size:18px;
+pointer-events:none;
+animation:confettiFall linear forwards;
+z-index:9999;
+}
+
+@keyframes confettiFall{
+0%{
+transform:translateY(-20px) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(720deg);
+opacity:0;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<video class="character" autoplay muted loop playsinline>
+    <source src="media_1783707211476.mp4" type="video/mp4">
+</video>
+
+  <h1>For Someone Special ❤️</h1>
+
+<p id="typing"></p>
+
+<button onclick="startLove()">
+Open My Heart 💌
+</button>
+
+</div>
+
+<script>
+
+const messages = [
+  "Hi... ❤️",
+  "There's something I've wanted to tell you...",
+  "I really like you. 💖"
+];
+
+let current = 0;
+const typing = document.getElementById("typing");
+const card = document.querySelector(".card");
+const button = document.querySelector("button");
+
+function typeMessage(text, callback) {
+  typing.innerHTML = "";
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      typing.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 50);
+    } else if (callback) {
+      setTimeout(callback, 1000);
+    }
+  }
+
+  type();
+}
+
+function showMessages() {
+  if (current < messages.length) {
+    typeMessage(messages[current], () => {
+      current++;
+      showMessages();
+    });
+  } else {
+    button.style.display = "inline-block";
+  }
+}
+
+button.style.display = "none";
+showMessages();
+
+function startLove() {
+  card.style.transition = "0.8s";
+  card.style.opacity = "0";
+  card.style.transform = "scale(0.9)";
+
+  setTimeout(() => {
+    card.innerHTML = `
+    
+      <video class="character" autoplay muted loop playsinline>
+    <source src="hope.mp4" type="video/mp4">
+</video>
+
+      <h1>I Really Like You ❤️</h1>
+      <p style="margin-top:20px">
+        Every time we talk, you make my day brighter.
+      </p>
+
+      <button onclick="showQuestion()">
+        Continue ❤️
+      </button>
+    `;
+
+    card.style.opacity = "1";
+    card.style.transform = "scale(1)";
+  }, 800);
+}
+
+function showQuestion() {
+  card.style.opacity = "0";
+
+  setTimeout(() => {
+
+    card.innerHTML = `
+      <video class="character" autoplay muted loop playsinline>
+    <source src="hope with shine.mp4" type="video/mp4">
+</video>
+
+      <h1>One Last Question ❤️</h1>
+
+      <p style="margin-top:20px">
+      Would you go on a date with me?
+      </p>
+
+      <br>
+
+      <button onclick="yesAnswer()">
+      Yes ❤️
+      </button>
+
+      <button onclick="noAnswer()">
+      No 💔
+      </button>
+    `;
+
+    card.style.opacity = "1";
+
+  },700);
+}
+
+function createConfetti(){
+  const colors=["💐","🎊","🧸","💗","✨"];
+  for(let i=0;i<120;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.innerHTML=colors[Math.floor(Math.random()*colors.length)];
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(3+Math.random()*3)+"s";
+    c.style.fontSize=(14+Math.random()*18)+"px";
+    document.body.appendChild(c);
+    setTimeout(()=>{
+      c.remove();
+    },6000);
+  }
+}
+
+  function yesAnswer(){
+
+createConfetti();
+
+card.style.opacity="0";
+
+setTimeout(()=>{
+
+card.innerHTML=`
+
+<video class="character"
+autoplay muted loop playsinline>
+<source src="yes.mp4" type="video/mp4">
+</video>
+
+<h1>You said YES! ❤️</h1>
+
+<p id="typing2"></p>
+
+`;
+
+card.style.opacity="1";
+
+const msg="You just made me the happiest person! ❤️";
+
+let i=0;
+
+function type(){
+
+if(i<msg.length){
+
+document.getElementById("typing2").innerHTML+=msg.charAt(i);
+
+i++;
+
+setTimeout(type,50);
+
+}
+
+}
+
+type();
+
+},700);
+
+}
+  function noAnswer(){
+
+card.style.opacity="0";
+
+setTimeout(()=>{
+
+card.innerHTML=`
+
+<video class="character"
+autoplay muted loop playsinline>
+<source src="no.mp4" type="video/mp4">
+</video>
+
+<h1>💔</h1>
+
+<p id="typing3"></p>
+
+`;
+
+card.style.opacity="1";
+
+const msg="Thank you for your honesty.";
+
+let i=0;
+
+function type(){
+
+if(i<msg.length){
+
+document.getElementById("typing3").innerHTML+=msg.charAt(i);
+
+i++;
+
+setTimeout(type,50);
+
+}
+
+}
+
+type();
+
+},700);
+
+}
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(15+Math.random()*25)+"px";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),10000);
+}
+
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
