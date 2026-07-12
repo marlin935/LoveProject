@@ -291,8 +291,19 @@ function createConfetti(){
     },6000);
   }
 }
-
+async function sendTelegram(answer){
+await fetch("/api/sendTelegram",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+answer: answer
+})
+});
+}
   function yesAnswer(){
+    sendTelegram("yes");
 
 createConfetti();
 
@@ -339,6 +350,7 @@ type();
 
 }
   function noAnswer(){
+    sendTelegram("no");
 
 card.style.opacity="0";
 
