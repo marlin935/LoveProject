@@ -368,12 +368,15 @@ function showMessages() {
 button.style.display = "none";
 showMessages();
 
-  function openEnvelope(){
+function openEnvelope(){
   const envelope = document.getElementById("envelope");
   const container = document.getElementById("envelopeContainer");
+  const hint = document.getElementById("bottomHint");
 
   envelope.classList.add("open");
-  document.getElementById("bottomHint").style.opacity = "0";
+  hint.style.animation = "none";
+  hint.style.opacity = "0";
+
   setTimeout(()=>{
     container.classList.add("hide");
   },900);
@@ -381,6 +384,7 @@ showMessages();
   setTimeout(()=>{
     container.style.display="none";
     document.querySelector(".card").style.display="block";
+    hint.style.display = "none";
   },1500);
 }
 function startLove() {
