@@ -151,6 +151,24 @@ transform:translateY(110vh) rotate(720deg);
 opacity:0;
 }
 }
+.bottom-hint{
+position:fixed;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+color:rgba(255,255,255,.85);
+font-size:14px;
+letter-spacing:3px;
+text-transform:uppercase;
+animation:hintFade 1.8s ease-in-out infinite;
+z-index:9999;
+transition:opacity .4s ease;
+}
+
+@keyframes hintFade{
+0%,100%{opacity:.35;}
+50%{opacity:1;}
+}
 </style>
 
 </head>
@@ -172,7 +190,7 @@ Open My Heart 💌
 </button>
 
 </div>
-
+<div class="bottom-hint" id="bottomHint">tap to open</div>
 <script>
 
 const messages = [
@@ -218,6 +236,7 @@ button.style.display = "none";
 showMessages();
 
 function startLove() {
+  document.getElementById("bottomHint").style.opacity = "0";
   card.style.transition = "0.8s";
   card.style.opacity = "0";
   card.style.transform = "scale(0.9)";
